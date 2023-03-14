@@ -26,6 +26,7 @@ public class UserRepositoryImpl implements UserRepository {
     public Set<User> getList() {
         return entityManager.createQuery("from User", User.class).getResultList().stream().collect(Collectors.toSet());
     }
+
     @Override
     public User getUser(Long id) {
         return entityManager.find(User.class, id);
@@ -36,20 +37,24 @@ public class UserRepositoryImpl implements UserRepository {
         entityManager.createQuery(
                 "DELETE User WHERE id = :id").setParameter("id", id).executeUpdate();
     }
+
     @Override
-    public void editUser(Long id, User user) {
+    public void editUser(User user) {
         entityManager.merge(user);
     }
+
     @Override
     public User showUser(Long id) {
         return entityManager.find(User.class, id);
     }
+
     @Override
     public UserDetails getUser(String email) {
         return entityManager.createQuery(
                         "SELECT u FROM User u WHERE u.email = :email", User.class).setParameter("email", email)
                 .getSingleResult();
     }
+
     @Override
     public User getUserByEmail(String email) {
         return entityManager.createQuery(

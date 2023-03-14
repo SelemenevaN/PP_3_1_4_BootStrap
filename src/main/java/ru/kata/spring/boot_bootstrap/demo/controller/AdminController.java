@@ -24,12 +24,11 @@ import java.util.Set;
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
-    private final PasswordEncoder passwordEncoder;
 
-    public AdminController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
+
     }
 
     @GetMapping()
@@ -45,7 +44,6 @@ public class AdminController {
 
     @PostMapping("/createNew")
     public String saveNewUser(@ModelAttribute("user") User user, @RequestParam(value = "nameRole") String nameRole) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role role = new Role(nameRole);
         roleService.add(role);
         user.setRoles(Set.of(role));
@@ -54,11 +52,7 @@ public class AdminController {
     }
 
     @PatchMapping(value = "/{id}/edit")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id,
-                             @RequestParam(value = "nameRole") String nameRole) {
-        if (user.getPassword().hashCode() != userService.getUser(id).getPassword().hashCode())
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-
+    public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "nameRole") String nameRole) {
         Role role = new Role(nameRole);
         roleService.add(role);
         user.setRoles(Set.of(role));

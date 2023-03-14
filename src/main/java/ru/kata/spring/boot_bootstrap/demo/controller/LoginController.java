@@ -13,14 +13,15 @@ import ru.kata.spring.boot_bootstrap.demo.service.UserService;
 @RequestMapping
 public class LoginController {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public LoginController(UserService userService, PasswordEncoder passwordEncoder) {
+    public LoginController(UserService userService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
     }
+
     @GetMapping("/login")
-    String login() {return "login";}
+    String login() {
+        return "login";
+    }
 
 }

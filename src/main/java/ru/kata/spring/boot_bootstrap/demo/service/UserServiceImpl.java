@@ -30,7 +30,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<User> allUsers() {return userRepository.getList();}
+    public Set<User> allUsers() {
+        return userRepository.getList();
+    }
 
     @Transactional
     @Override
@@ -39,29 +41,21 @@ public class UserServiceImpl implements UserService {
         userRepository.add(user);
     }
 
-    @Override
-    public User showUser(Long id) {return userRepository.showUser(id);}
-
     @Transactional
     @Override
-    public void deleteUser(Long id) {userRepository.deleteUser(id);}
+    public void deleteUser(Long id) {
+        userRepository.deleteUser(id);
+    }
 
     @Override
-    public User getUser(Long id) {return userRepository.getUser(id);}
+    public User getUser(Long id) {
+        return userRepository.getUser(id);
+    }
 
-    @Override
-    public void editUser(Long id, User user) {}
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = (User)userRepository.getUser(email);
-        user.getRoles().size();
-        return user;
-    }
-    @Override
-    @Transactional
-    public User getUserByEmail(String email)throws UsernameNotFoundException {
-        User user = (User)userRepository.getUserByEmail(email);
+        User user = (User) userRepository.getUser(email);
         user.getRoles().size();
         return user;
     }
@@ -70,14 +64,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(User updatedUser) {
         boolean checkNewEmail = false;
-        if (userRepository.getUserByEmail(updatedUser.getEmail())==null)
+        if (userRepository.getUserByEmail(updatedUser.getEmail()) == null) {
             checkNewEmail = true;
+        }
+        if (!updatedUser.getPassword().equals(getUser(updatedUser.getId()).getPassword())) {
+            updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        }
         userRepository.add(updatedUser);
         return checkNewEmail;
-    }
-
-      private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles) {
-        return roles.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toList());
     }
 }
 

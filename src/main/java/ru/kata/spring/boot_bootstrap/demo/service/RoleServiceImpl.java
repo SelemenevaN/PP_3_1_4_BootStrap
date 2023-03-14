@@ -25,32 +25,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Set<Role> getList() {
-        return roleRepository.getList();
-    }
-
-    @Override
     public Set<Role> getAllRoles() {
         return roleRepository.getAllRoles();
     }
 
-    @Override
-    public Role getRole(Long id) {
-        return roleRepository.getRole(id);
-    }
-
-    @Override
-    @Transactional
-    public void deleteRole(Long id) {
-        roleRepository.deleteRole(id);
-    }
-
-    @Override
-    @Transactional
-    public void editRole(Role role) {
-        roleRepository.editRole(role);
-    }
-
-    @Override
-    public Set<Role> listByRole(Set<String> name) {return roleRepository.listByName(name);}
 }

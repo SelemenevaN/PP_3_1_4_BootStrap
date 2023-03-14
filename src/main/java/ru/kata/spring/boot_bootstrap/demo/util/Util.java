@@ -33,8 +33,8 @@ public class Util {
         adminSet.add(roleAdmin);
         adminSet.add(roleUser);
         userSet.add(roleUser);
-        User user = new User("user","Jane", "Smith", "user@mail.ru", userSet,30l);
-        User admin = new User("admin","John", "Smith", "admin@mail.ru", adminSet, 40l);
+        User user = new User("user","Jane", "Smith", "user@mail.ru", userSet, (byte) 30);
+        User admin = new User("admin","John", "Smith", "admin@mail.ru", adminSet, (byte)40);
 
         userService.addUser(user);
         userService.addUser(admin);
