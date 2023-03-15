@@ -23,37 +23,9 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public Set<Role> getList() {
-        return (entityManager.createQuery("select s from Role s", Role.class).getResultList()).stream().collect(Collectors.toSet());
-    }
-
-    @Override
     public Set<Role> getAllRoles() {
-        return (entityManager.createQuery("from Role", Role.class).getResultList()).stream().collect(Collectors.toSet());
-    }
-
-    @Override
-    public Role getRole(Long id) {
-        return entityManager.find(Role.class, id);
-    }
-
-    @Override
-    public void deleteRole(Long id) {
-        entityManager.remove(getRole(id));
-    }
-
-    @Override
-    public void editRole(Role role) {
-        entityManager.merge(role);
-    }
-
-    @Override
-    public Set<Role> listByName(Set<String> name) {
-        return entityManager.createQuery("select u FROM Role u WHERe u.role in (:id)", Role.class)
-                .setParameter("id", name)
-                .getResultList()
-                .stream()
-                .collect(Collectors.toSet());
+        return (entityManager.createQuery("from Role", Role.class)
+                .getResultList()).stream().collect(Collectors.toSet());
     }
 
 }

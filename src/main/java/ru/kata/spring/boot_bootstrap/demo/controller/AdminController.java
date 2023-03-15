@@ -43,7 +43,8 @@ public class AdminController {
     }
 
     @PostMapping("/createNew")
-    public String saveNewUser(@ModelAttribute("user") User user, @RequestParam(value = "nameRole") String nameRole) {
+    public String saveNewUser(@ModelAttribute("user") User user,
+                              @RequestParam(value = "nameRole") String nameRole) {
         Role role = new Role(nameRole);
         roleService.add(role);
         user.setRoles(Set.of(role));
@@ -52,7 +53,8 @@ public class AdminController {
     }
 
     @PatchMapping(value = "/{id}/edit")
-    public String updateUser(@ModelAttribute("user") User user, @RequestParam(value = "nameRole") String nameRole) {
+    public String updateUser(@ModelAttribute("user") User user,
+                             @RequestParam(value = "nameRole") String nameRole) {
         Role role = new Role(nameRole);
         roleService.add(role);
         user.setRoles(Set.of(role));

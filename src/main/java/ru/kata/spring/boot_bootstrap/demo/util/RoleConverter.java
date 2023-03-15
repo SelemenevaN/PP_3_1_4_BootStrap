@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_bootstrap.demo.configs;
+package ru.kata.spring.boot_bootstrap.demo.util;
 
 import org.springframework.core.convert.converter.Converter;
 import ru.kata.spring.boot_bootstrap.demo.model.Role;

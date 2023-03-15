@@ -10,8 +10,6 @@ public interface UserRepository {
     Set<User> getList();
     User getUser(Long id);
     void deleteUser(Long id);
-    void editUser(User user);
     UserDetails getUser(String email);
-    User showUser(Long id);
     User getUserByEmail(String email);
 }
